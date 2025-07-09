@@ -15,20 +15,22 @@
           fontFamily: {
             sans: ['"Noto Sans Thai"', 'sans-serif'],
           },
+          height: {
+            '128': '32rem',
+          }
         },
       },
     };
   </script>
 </head>
-<body class="bg-slate-100 font-sans flex items-center justify-center min-h-screen p-5">
-  <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-9 max-w-4xl w-full">
+<body class="bg-slate-100 font-sans">
+
+  <div class="bg-white rounded-2xl shadow-sm border border-slate-200 m-4 p-6 sm:p-9 min-h-[calc(100vh-2rem)]">
     <header class="flex items-center justify-between mb-6">
       <div class="flex items-center">
-        <span class="text-3xl mr-4">🚽</span>
-        <h1 class="text-2xl font-semibold text-slate-800">Toilet Tracker | admin</h1>
+        <img src="image /Logo desige-Photoroom.png" alt="Logo" class="h-50 w-60">
       </div>
       <div class="text-slate-600 font-medium">
-       
         <button id="login-btn" class="ml-4 bg-blue-500 text-white font-medium text-sm py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors">
           เข้าสู่ระบบแอดมิน
         </button>
@@ -48,14 +50,16 @@
 
       <section>
         <h2 class="text-xl font-semibold text-slate-800 mb-4">ปัญหา</h2>
-
-        <div class="max-h-96 overflow-y-auto border border-slate-200 rounded-xl p-4 bg-slate-50 space-y-4" id="problem-list">
-          </div>
+        <div class="max-h-[40rem] overflow-y-auto border border-slate-200 rounded-xl p-4 bg-slate-50 space-y-4" id="problem-list">
+        </div>
       </section>
     </main>
-
-    <footer class="mt-8 pt-5 text-sm text-slate-400">contact|gmail</footer>
   </div>
+
+  <footer class="fixed bottom-4 left-4 bg-white py-2 px-4 rounded-lg shadow-md text-sm text-slate-500 border border-slate-200">
+    contact|gmail
+  </footer>
+
 
   <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden">
     <div class="bg-blue-100 rounded-2xl shadow-lg p-6 sm:p-8 max-w-md w-full">
@@ -63,7 +67,6 @@
         <h2 class="text-xl font-semibold text-slate-800">เพิ่มปัญหาใหม่</h2>
         <button id="close-modal-btn" class="text-slate-500 hover:text-slate-800">&times;</button>
       </div>
-
       <form id="problem-form">
         <div class="flex items-center gap-4 mb-4">
           <label for="image-input" class="cursor-pointer flex-shrink-0 flex items-center justify-center w-20 h-20 bg-slate-200 text-slate-500 rounded-lg text-4xl font-light hover:bg-slate-300">
@@ -76,7 +79,6 @@
           </div>
           <p class="text-sm text-slate-600">เพิ่มรูปภาพของปัญหา (ถ้ามี)</p>
         </div>
-
         <div class="mb-4">
           <label for="room-id" class="block text-sm font-medium text-slate-700 mb-1">ห้องน้ำ (เช่น ขก 12)</label>
           <input type="text" id="room-id" class="w-full p-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
@@ -101,6 +103,7 @@
   </div>
 
   <script>
+    // --- JavaScript ไม่มีการเปลี่ยนแปลง ---
     const addProblemBtn = document.getElementById('add-problem-btn');
     const modal = document.getElementById('modal');
     const closeModalBtn = document.getElementById('close-modal-btn');
@@ -111,7 +114,7 @@
     const removeImageBtn = document.getElementById('remove-image-btn');
     const imageViewerModal = document.getElementById('image-viewer-modal');
     const viewerImage = document.getElementById('viewer-image');
-    const loginBtn = document.getElementById('login-btn'); // Get the login button
+    const loginBtn = document.getElementById('login-btn');
 
     addProblemBtn.addEventListener('click', () => {
       modal.classList.remove('hidden');
@@ -154,7 +157,6 @@
 
     problemForm.addEventListener('submit', (e) => {
       e.preventDefault();
-
       const roomId = document.getElementById('room-id').value;
       const userName = document.getElementById('user-name').value;
       const problemDesc = document.getElementById('problem-desc').value;
@@ -166,9 +168,7 @@
         month: 'short',
         year: 'numeric',
       });
-
       const imgSrc = imagePreview.src || '';
-
       const newProblem = document.createElement('div');
       newProblem.className = "bg-white rounded-xl p-4 flex items-center gap-4 shadow border";
       newProblem.innerHTML = `
@@ -182,10 +182,7 @@
         </div>
         <div class="text-sm font-medium text-slate-600 ml-auto">รอดำเนินการ</div>
       `;
-
       problemList.prepend(newProblem);
-
-      // reset form
       problemForm.reset();
       imageInput.value = '';
       imagePreview.src = '';
@@ -201,9 +198,8 @@
       }
     });
 
-    // Login button functionality
     loginBtn.addEventListener('click', () => {
-      window.location.href = 'login.html'; // Redirect to login.html
+      window.location.href = 'login.html';
     });
   </script>
 </body>
